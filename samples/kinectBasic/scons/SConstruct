@@ -1,0 +1,7 @@
+TARGET = 'kinectBasicApp'
+SOURCES  = ['kinectBasicApp.cpp']
+BLOCKS = ['kinect']
+DEBUG = 1
+
+SConscript('../../../../../scons/SConscript',
+	exports = ['TARGET', 'SOURCES', 'DEBUG', 'BLOCKS'])
