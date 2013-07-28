@@ -1,9 +1,0 @@
-TARGET = 'kinectPointCloudApp'
-SOURCES  = ['kinectPointCloudApp.cpp']
-RESOURCES = ['mainFrag.glsl', 'mainVert.glsl']
-BLOCKS = ['kinect']
-DEBUG = 1
-
-SConscript('../../../../../scons/SConscript',
-	exports = ['TARGET', 'SOURCES', 'DEBUG', 'RESOURCES', 'BLOCKS'])
-

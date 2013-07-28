@@ -1,7 +1,8 @@
 env = Environment()
 
-env['APP_TARGET'] = 'kinectBasicApp'
-env['APP_SOURCES'] = ['kinectBasicApp.cpp']
+env['APP_TARGET'] = 'KinectPointCloudGLApp'
+env['APP_SOURCES'] = ['KinectPointCloudGLApp.cpp']
+env['ASSETS'] = ['*.glsl']
 
 env = SConscript('../../../scons/SConscript', exports = 'env')
 
