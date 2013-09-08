@@ -4,7 +4,7 @@ _INCLUDES = [Dir('../src').abspath, Dir('../src/freenect').abspath]
 
 _SOURCES = ['CinderFreenect.cpp']
 _SOURCES = [File('../src/' + s).abspath for s in _SOURCES]
-_SOURCES_FREENECT = ['cameras.c', 'core.c', 'registration.c', 'tilt.c', 'usb_libusb10.c']
+_SOURCES_FREENECT = ['cameras.c', 'core.c', 'flags.c', 'registration.c', 'tilt.c', 'usb_libusb10.c']
 _SOURCES_FREENECT = [File('../src/freenect/' + s).abspath for s in _SOURCES_FREENECT]
 _SOURCES += _SOURCES_FREENECT
 
