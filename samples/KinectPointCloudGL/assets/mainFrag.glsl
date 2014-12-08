@@ -1,12 +1,14 @@
-#version 110
-varying float depth;
+#version 150
+
+in float depth;
+out vec4 oColor;
 
 void main()
 {
 //	if( depth < 0.1 ) discard;
 
-	gl_FragColor.rgb	= vec3( depth );
-	gl_FragColor.a		= 1.0;
+	oColor.rgb	= vec3( depth );
+	oColor.a	= 1.0;
 }
 
 

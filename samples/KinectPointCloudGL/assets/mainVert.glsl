@@ -1,15 +1,19 @@
+#version 150
+
 uniform sampler2D depthTex;
-varying vec4 vVertex;
-varying float depth;
+
+uniform mat4 ciModelViewProjection;
+
+in vec4 ciPosition;
+in vec2 ciTexCoord0;
+
+out vec4 vVertex;
+out float depth;
 
 void main()
 {
-	gl_TexCoord[0]		= gl_MultiTexCoord0;
-	vVertex				= vec4( gl_Vertex );
-	
-	depth				= texture2D( depthTex, gl_TexCoord[0].st ).b;
-	
+	vVertex				= ciPosition;
+	depth				= texture( depthTex, ciTexCoord0.st ).b;
 	vVertex.z			+= depth * 1000.0;
-
-	gl_Position			= gl_ModelViewProjectionMatrix * vVertex;
+	gl_Position			= ciModelViewProjection * vVertex;
 }
