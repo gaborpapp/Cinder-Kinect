@@ -1,4 +1,4 @@
-#include "cinder/app/AppBasic.h"
+#include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "cinder/gl/Texture.h"
@@ -14,9 +14,9 @@ using namespace ci::app;
 using namespace std;
 
 
-class kinectBasicApp : public AppBasic {
+class kinectBasicApp : public App {
   public:
-	void prepareSettings( Settings* settings );
+	static void prepareSettings( Settings* settings );
 	void setup();
 	void mouseUp( MouseEvent event );
 	void update();
@@ -75,4 +75,4 @@ void kinectBasicApp::draw()
 }
 
 
-CINDER_APP_BASIC( kinectBasicApp, RendererGl )
+CINDER_APP( kinectBasicApp, RendererGl, kinectBasicApp::prepareSettings )

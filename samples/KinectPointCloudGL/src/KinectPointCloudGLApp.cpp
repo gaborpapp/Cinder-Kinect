@@ -1,9 +1,5 @@
-#include "cinder/app/AppBasic.h"
+#include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
-#include "cinder/gl/Batch.h"
-#include "cinder/gl/GlslProg.h"
-#include "cinder/gl/Vbo.h"
-#include "cinder/gl/Texture.h"
 #include "cinder/gl/gl.h"
 #include "cinder/Camera.h"
 #include "cinder/params/Params.h"
@@ -19,9 +15,9 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-class PointCloudGl : public AppBasic {
+class PointCloudGl : public App {
   public:
-	void prepareSettings( Settings* settings );
+	static void prepareSettings( Settings* settings );
 	void setup();
 	void createBatch();
 	void update();
@@ -137,4 +133,4 @@ void PointCloudGl::draw()
 }
 
 
-CINDER_APP_BASIC( PointCloudGl, RendererGl )
+CINDER_APP( PointCloudGl, RendererGl, PointCloudGl::prepareSettings )
