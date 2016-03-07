@@ -1,7 +1,7 @@
 env = Environment()
 
-env['APP_TARGET'] = 'kinectBasicApp'
-env['APP_SOURCES'] = ['kinectBasicApp.cpp']
+env['APP_TARGET'] = 'KinectBasicApp'
+env['APP_SOURCES'] = ['KinectBasicApp.cpp']
 
 env = SConscript('../../../scons/SConscript', exports = 'env')
 
