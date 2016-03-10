@@ -123,7 +123,7 @@ class Kinect {
 	static int	getNumDevices();
 
 	//! Parent class for all Kinect exceptions
-	class Exc : cinder::Exception {
+	class Exc : public cinder::Exception {
 	};
 	
 	//! Exception thrown from a failure in freenect_init()
