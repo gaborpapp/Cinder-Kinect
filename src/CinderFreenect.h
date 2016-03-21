@@ -175,6 +175,7 @@ class Kinect {
 		volatile bool					mNewVideoFrame, mNewDepthFrame;
 		volatile bool					mLastVideoFrameInfrared;
 		float							mTilt;
+		bool							mDepthRegister;
 	};
 
   protected:

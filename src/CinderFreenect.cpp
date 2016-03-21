@@ -149,7 +149,8 @@ Kinect::Kinect( Device device )
 Kinect::Obj::Obj( int deviceIndex, bool depthRegister )
 	: mColorBuffers( 640 * 480 * 3, this ), mDepthBuffers( 640 * 480, this ),
 		mShouldDie( false ), mVideoInfrared( false ),
-		mNewVideoFrame( false ), mNewDepthFrame( false )
+		mNewVideoFrame( false ), mNewDepthFrame( false ),
+		mDepthRegister( depthRegister )
 {
 	if( freenect_open_device( getContext(), &mDevice, deviceIndex ) < 0 )
 		throw ExcFailedOpenDevice();
@@ -208,9 +209,17 @@ void Kinect::depthImageCB( freenect_device *dev, void *d, uint32_t timestamp )
 
 		kinectObj->mDepthBuffers.derefActiveBuffer();					// finished with current active buffer
 		uint16_t *destPixels = kinectObj->mDepthBuffers.getNewBuffer(); // request a new buffer
-		for( size_t p = 0; p < 640 * 480; ++p ) {						// out = 1.0 - ( in / 2048 ) ^ 2
-			uint32_t v = depth[p];
-			destPixels[p] = 65535 - ( v * v ) >> 4;						// 1 / ( 2^10 * 2^10 ) * 2^16 = 2^-4
+		if( kinectObj->mDepthRegister ) {
+			for( size_t p = 0; p < 640 * 480; ++p ) {					// max depth value is 10000 in registered mode
+				uint32_t v = depth[p];
+				destPixels[p] = ( v == 0 ) ? 0 : ( 65535 - ( v << 2 ) );
+			}
+		}
+		else {
+			for( size_t p = 0; p < 640 * 480; ++p ) {					// out = 1.0 - ( in / 2048 ) ^ 2
+				uint32_t v = depth[p];
+				destPixels[p] = 65535 - ( ( v * v ) >> 4 );				// 1 / ( 2^10 * 2^10 ) * 2^16 = 2^-4
+			}
 		}
 		kinectObj->mDepthBuffers.setActiveBuffer( destPixels );			// set this new buffer to be the current active buffer
 		kinectObj->mNewDepthFrame = true;								// flag that there's a new depth frame
